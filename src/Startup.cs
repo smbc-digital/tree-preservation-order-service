@@ -53,7 +53,7 @@ namespace tree_preservation_order_service
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("v1/swagger.json", "tree_preservation_order_service API");
+                c.SwaggerEndpoint("v1/swagger.json", "Tree Preservation Order Service API");
             });
         }
     }

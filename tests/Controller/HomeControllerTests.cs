@@ -1,48 +1,46 @@
 using tree_preservation_order_service.Controllers;
-using Microsoft.AspNetCore.Mvc;
 using Moq;
-using StockportGovUK.AspNetCore.Availability.Managers;
 using Xunit;
+using tree_preservation_order_service.Services;
+using Microsoft.Extensions.Logging;
+using tree_preservation_order_service.Models;
+using System.Threading.Tasks;
 
 namespace tree_preservation_order_service_tests.Controllers
 {
     public class HomeControllerTests
     {
         private readonly HomeController _homeController;
-        private readonly Mock<IAvailabilityManager> _mockAvailabilityManager = new Mock<IAvailabilityManager>();
+        private readonly Mock<ITreePreservationOrderService> _mockTreePreservationOrderService = new Mock<ITreePreservationOrderService>();
 
         public HomeControllerTests()
         {
-            _homeController = new HomeController(_mockAvailabilityManager.Object);
+            _homeController = new HomeController(Mock.Of<ILogger<HomeController>>(), _mockTreePreservationOrderService.Object);
         }
 
         [Fact]
-        public void Get_ShouldReturnOK()
+        public async Task Post_ShouldCallCreateCase()
         {
-            // Act
-            var response = _homeController.Get();
-            var statusResponse = response as OkResult;
-            
-            // Assert
-            Assert.NotNull(statusResponse);
-            Assert.Equal(200, statusResponse.StatusCode);
+            _mockTreePreservationOrderService
+                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrder>()))
+                .ReturnsAsync("test");
+
+            var result = await _homeController.Post(null);
+
+            _mockTreePreservationOrderService
+                .Verify(_ => _.CreateCase(null), Times.Once);
         }
 
         [Fact]
-        public void Post_ShouldReturnOK()
+        public async Task Post_ReturnOkActionResult()
         {
-            // Arrange
-            _mockAvailabilityManager
-                .Setup(_ => _.IsFeatureEnabled(It.IsAny<string>()))
-                .ReturnsAsync(true);
+            _mockTreePreservationOrderService
+                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrder>()))
+                .ReturnsAsync("test");
 
-            // Act
-            var response = _homeController.Post();
-            var statusResponse = response as OkResult;
-            
-            // Assert
-            Assert.NotNull(statusResponse);
-            Assert.Equal(200, statusResponse.StatusCode);
+            var result = await _homeController.Post(null);
+
+            Assert.Equal("OkObjectResult", result.GetType().Name);
         }
     }
 }

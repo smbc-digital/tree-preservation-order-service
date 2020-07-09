@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
-using StockportGovUK.AspNetCore.Availability.Managers;
+using System.Threading.Tasks;
+using tree_preservation_order_service.Models;
+using tree_preservation_order_service.Services;
 
 namespace tree_preservation_order_service.Controllers
 {
@@ -10,23 +13,18 @@ namespace tree_preservation_order_service.Controllers
     [TokenAuthentication]
     public class HomeController : ControllerBase
     {
-        private IAvailabilityManager _availabilityManager;
-        
-        public HomeController(IAvailabilityManager availabilityManager)
-        {
-            _availabilityManager = availabilityManager;
-        }
+        private readonly ILogger<HomeController> _logger;
+        private readonly ITreePreservationOrderService _treePreservationOrderService;
 
-        [HttpGet]
-        public IActionResult Get()
+        public HomeController(ILogger<HomeController> logger,
+                              ITreePreservationOrderService treePreservationOrderService)
         {
-            return Ok();
+            _logger = logger;
+            _treePreservationOrderService = treePreservationOrderService;
         }
 
         [HttpPost]
-        public IActionResult Post()
-        {
-            return Ok();
-        }
+        public async Task<IActionResult> Post([FromBody] TreePreservationOrder treePreservationOrder)
+            => Ok(await _treePreservationOrderService.CreateCase(treePreservationOrder));
     }
 }

@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tree_preservation_order_service", "src\tree_preservation_order_service.csproj", "{F17C3DF9-864F-4D72-82F3-08AB1C0DC7E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tree-preservation-order-service", "src\tree_preservation_order_service.csproj", "{F17C3DF9-864F-4D72-82F3-08AB1C0DC7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tree_preservation_order_service-tests", "tests\tree_preservation_order_service-tests.csproj", "{6A9B8ED2-A37A-45DC-89B2-E7C44F5C6587}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tree-preservation-order-service-tests", "tests\tree_preservation_order_service_tests.csproj", "{6A9B8ED2-A37A-45DC-89B2-E7C44F5C6587}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
