@@ -1,10 +1,10 @@
-﻿using System.Threading.Tasks;
-using tree_preservation_order_service.Models;
+﻿using StockportGovUK.NetStandard.Models.Models.Verint.VerintOnlineForm;
+using System.Threading.Tasks;
 
 namespace tree_preservation_order_service.Services
 {
     public interface ITreePreservationOrderService
     {
-        Task<string> CreateCase(TreePreservationOrder treePreservationOrder);
+        Task<string> CreateVOFCase(VerintOnlineFormRequest model);
     }
 }

@@ -1,8 +1,7 @@
 ﻿using StockportGovUK.NetStandard.Gateways.VerintService;
-using StockportGovUK.NetStandard.Models.Verint;
+using StockportGovUK.NetStandard.Models.Models.Verint.VerintOnlineForm;
 using System;
 using System.Threading.Tasks;
-using tree_preservation_order_service.Models;
 
 namespace tree_preservation_order_service.Services
 {
@@ -15,24 +14,26 @@ namespace tree_preservation_order_service.Services
             _verintServiceGateway = verintServiceGateway;
         }
 
-        public async Task<string> CreateCase(TreePreservationOrder treePreservationOrder)
+        public async Task<string> CreateVOFCase(VerintOnlineFormRequest model)
         {
-            var crmCase = new Case();
+            // model from json
+            // verint case
+            // data to go in verint online form request
             try
             {
-                var response = await _verintServiceGateway.CreateCase(crmCase);
+                var response = await _verintServiceGateway.CreateVerintOnlineFormCase(model);
 
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new Exception("Status code not successful");
                 }
+
+                return response.ResponseContent.ToString();
             }
             catch (Exception ex)
             {
-                throw new Exception($"CRMService CreateAbandonedVehicleService an exception has occured while creating the case in verint service", ex);
+                throw new Exception($"CRMService CreateVerintOnlineFormCase an exception has occured while creating the case in verint service", ex);
             }
-
-            return "123456";
         }
     }
 }
