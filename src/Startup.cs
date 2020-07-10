@@ -11,6 +11,8 @@ using StockportGovUK.AspNetCore.Availability;
 using StockportGovUK.AspNetCore.Availability.Middleware;
 using StockportGovUK.NetStandard.Gateways;
 using StockportGovUK.NetStandard.Gateways.Extensions;
+using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Gateways.MailingService;
 
 namespace tree_preservation_order_service
 {
@@ -29,7 +31,10 @@ namespace tree_preservation_order_service
             services.AddControllers()
                     .AddNewtonsoftJson();
             services.AddStorageProvider(Configuration);
-            services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
+
+            services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>(Configuration);
+            services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
+
             services.AddAvailability();
             services.AddSwagger();
             services.AddHealthChecks()
