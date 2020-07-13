@@ -5,7 +5,6 @@ using tree_preservation_order_service.Services;
 using Microsoft.Extensions.Logging;
 using tree_preservation_order_service.Models;
 using System.Threading.Tasks;
-using StockportGovUK.NetStandard.Models.Models.Verint.VerintOnlineForm;
 
 namespace tree_preservation_order_service_tests.Controllers
 {
@@ -23,20 +22,20 @@ namespace tree_preservation_order_service_tests.Controllers
         public async Task Post_ShouldCallCreateCase()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateVOFCase(It.IsAny<VerintOnlineFormRequest>()))
+                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);
 
             _mockTreePreservationOrderService
-                .Verify(_ => _.CreateVOFCase(null), Times.Once);
+                .Verify(_ => _.CreateTreePreservationOrderCase(null), Times.Once);
         }
 
         [Fact]
         public async Task Post_ReturnOkActionResult()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateVOFCase(It.IsAny<VerintOnlineFormRequest>()))
+                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);
