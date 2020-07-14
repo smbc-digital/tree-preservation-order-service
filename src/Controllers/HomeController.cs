@@ -1,7 +1,7 @@
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StockportGovUK.AspNetCore.Attributes.TokenAuthentication;
-using System.Threading.Tasks;
 using tree_preservation_order_service.Models;
 using tree_preservation_order_service.Services;
 
@@ -24,7 +24,7 @@ namespace tree_preservation_order_service.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TreePreservationOrder treePreservationOrder)
-            => Ok(await _treePreservationOrderService.CreateCase(treePreservationOrder));
+        public async Task<IActionResult> Post([FromBody] TreePreservationOrderRequest model)
+            => Ok(await _treePreservationOrderService.CreateTreePreservationOrderCase(model));
     }
 }

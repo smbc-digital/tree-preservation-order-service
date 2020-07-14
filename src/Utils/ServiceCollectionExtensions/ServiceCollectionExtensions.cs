@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using tree_preservation_order_service.Helpers;
 using tree_preservation_order_service.Services;
 
 namespace tree_preservation_order_service.Utils.ServiceCollectionExtensions
@@ -10,6 +11,7 @@ namespace tree_preservation_order_service.Utils.ServiceCollectionExtensions
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<ITreePreservationOrderService, TreePreservationOrderService>();
+            services.AddTransient<IMailHelper, MailHelper>();
         }
         public static void AddSwagger(this IServiceCollection services)
         {

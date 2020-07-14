@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using tree_preservation_order_service.Utils.HealthChecks;
-using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
-using tree_preservation_order_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -9,8 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockportGovUK.AspNetCore.Availability;
 using StockportGovUK.AspNetCore.Availability.Middleware;
-using StockportGovUK.NetStandard.Gateways;
 using StockportGovUK.NetStandard.Gateways.Extensions;
+using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Gateways.MailingService;
+using tree_preservation_order_service.Utils.HealthChecks;
+using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
+using tree_preservation_order_service.Utils.StorageProvider;
 
 namespace tree_preservation_order_service
 {
@@ -29,7 +30,10 @@ namespace tree_preservation_order_service
             services.AddControllers()
                     .AddNewtonsoftJson();
             services.AddStorageProvider(Configuration);
-            services.AddHttpClient<IGateway, Gateway>(Configuration, "IGatewayConfig");
+
+            services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>(Configuration);
+            services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
+            services.RegisterServices();
             services.AddAvailability();
             services.AddSwagger();
             services.AddHealthChecks()

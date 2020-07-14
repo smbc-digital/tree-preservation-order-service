@@ -1,7 +1,8 @@
-﻿using StockportGovUK.NetStandard.Gateways.VerintService;
-using StockportGovUK.NetStandard.Models.Verint;
-using System;
+﻿using System;
 using System.Threading.Tasks;
+using StockportGovUK.NetStandard.Gateways.VerintService;
+using StockportGovUK.NetStandard.Models.Enums;
+using tree_preservation_order_service.Helpers;
 using tree_preservation_order_service.Models;
 
 namespace tree_preservation_order_service.Services
@@ -9,30 +10,39 @@ namespace tree_preservation_order_service.Services
     public class TreePreservationOrderService : ITreePreservationOrderService
     {
         private readonly IVerintServiceGateway _verintServiceGateway;
+        private readonly IMailHelper _mailHelper;
 
-        public TreePreservationOrderService(IVerintServiceGateway verintServiceGateway)
+        public TreePreservationOrderService(IVerintServiceGateway verintServiceGateway, IMailHelper mailHelper)
         {
             _verintServiceGateway = verintServiceGateway;
+            _mailHelper = mailHelper;
         }
 
-        public async Task<string> CreateCase(TreePreservationOrder treePreservationOrder)
+        public async Task<string> CreateTreePreservationOrderCase(TreePreservationOrderRequest treePreservationOrderRequest)
         {
-            var crmCase = new Case();
+            //var verintOnlineFormRequest = new VerintOnlineFormRequest();
+
+            //var response = await _verintServiceGateway.CreateVerintOnlineFormCase(verintOnlineFormRequest);
+
             try
             {
-                var response = await _verintServiceGateway.CreateCase(crmCase);
-
-                if (!response.IsSuccessStatusCode)
+                Person person = new Person
                 {
-                    throw new Exception("Status code not successful");
-                }
+                    FirstName = treePreservationOrderRequest.FirstName,
+                    LastName = treePreservationOrderRequest.LastName,
+                    Email = treePreservationOrderRequest.Email,
+                    Phone = treePreservationOrderRequest.Phone,
+                };
+
+                _mailHelper.SendEmail(person, EMailTemplate.TreePreservationOrderRequest, "123456", treePreservationOrderRequest.StreetAddress);
+                return "123456";
             }
             catch (Exception ex)
             {
-                throw new Exception($"CRMService CreateAbandonedVehicleService an exception has occured while creating the case in verint service", ex);
+                throw new Exception($"CRMService CreateCase an exception has occured while creating the case in verint service", ex);
             }
-
-            return "123456";
         }
     }
 }
+
+

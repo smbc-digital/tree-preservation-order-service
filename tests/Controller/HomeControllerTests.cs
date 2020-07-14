@@ -1,10 +1,10 @@
-using tree_preservation_order_service.Controllers;
-using Moq;
-using Xunit;
-using tree_preservation_order_service.Services;
-using Microsoft.Extensions.Logging;
-using tree_preservation_order_service.Models;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+using Moq;
+using tree_preservation_order_service.Controllers;
+using tree_preservation_order_service.Models;
+using tree_preservation_order_service.Services;
+using Xunit;
 
 namespace tree_preservation_order_service_tests.Controllers
 {
@@ -22,20 +22,20 @@ namespace tree_preservation_order_service_tests.Controllers
         public async Task Post_ShouldCallCreateCase()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrder>()))
+                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);
 
             _mockTreePreservationOrderService
-                .Verify(_ => _.CreateCase(null), Times.Once);
+                .Verify(_ => _.CreateTreePreservationOrderCase(null), Times.Once);
         }
 
         [Fact]
         public async Task Post_ReturnOkActionResult()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrder>()))
+                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);
