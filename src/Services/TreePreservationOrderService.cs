@@ -39,7 +39,7 @@ namespace tree_preservation_order_service.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"CRMService CreateCase an exception has occured while creating the case in verint service", ex);
+                throw new Exception($"CreateTreePreservationOrderCase thrown exception when sending the email", ex);
             }
         }
     }
