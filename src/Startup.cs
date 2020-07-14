@@ -1,7 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using tree_preservation_order_service.Utils.HealthChecks;
-using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
-using tree_preservation_order_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +9,9 @@ using StockportGovUK.AspNetCore.Availability.Middleware;
 using StockportGovUK.NetStandard.Gateways.Extensions;
 using StockportGovUK.NetStandard.Gateways.VerintService;
 using StockportGovUK.NetStandard.Gateways.MailingService;
+using tree_preservation_order_service.Utils.HealthChecks;
+using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
+using tree_preservation_order_service.Utils.StorageProvider;
 
 namespace tree_preservation_order_service
 {
