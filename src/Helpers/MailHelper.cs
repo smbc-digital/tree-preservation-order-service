@@ -4,6 +4,7 @@ using StockportGovUK.NetStandard.Gateways.MailingService;
 using StockportGovUK.NetStandard.Models.Enums;
 using tree_preservation_order_service.Models;
 using StockportGovUK.NetStandard.Models.Mail;
+using StockportGovUK.NetStandard.Models.Models.TreePreservationOrder;
 
 namespace tree_preservation_order_service.Helpers
 {

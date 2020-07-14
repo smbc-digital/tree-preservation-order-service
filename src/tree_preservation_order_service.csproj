@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -20,7 +20,7 @@
     <PackageReference Include="StockportGovUK.AspNetCore.Attributes.TokenAuthentication" Version="1.0.0" />
     <PackageReference Include="StockportGovUK.AspNetCore.Availability" Version="1.1.0" />
     <PackageReference Include="StockportGovUK.AspNetCore.Logging.Elasticsearch.Aws" Version="1.0.0" />
-    <PackageReference Include="StockportGovUK.NetStandard.Gateways" Version="4.0.4" />
+    <PackageReference Include="StockportGovUK.NetStandard.Gateways" Version="4.0.5-prerelease216" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
