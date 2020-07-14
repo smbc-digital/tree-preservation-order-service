@@ -33,8 +33,8 @@ namespace tree_preservation_order_service
             services.AddStorageProvider(Configuration);
 
             services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>(Configuration);
-            //services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
-
+            services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
+            services.RegisterServices();
             services.AddAvailability();
             services.AddSwagger();
             services.AddHealthChecks()
