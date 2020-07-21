@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -23,8 +24,13 @@ namespace tree_preservation_order_service.Controllers
             _treePreservationOrderService = treePreservationOrderService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] TreePreservationOrderRequest model)
-            => Ok(await _treePreservationOrderService.CreateTreePreservationOrderCase(model));
+         [HttpPost]
+        public async Task<IActionResult> Post([FromBody] TreePreservationOrderRequest treePreservationOrderRequest)
+        {
+            if (!ModelState.IsValid)
+                throw new ArgumentException("Invalid request parameters.");
+
+            return Ok(await _treePreservationOrderService.CreateCase(treePreservationOrderRequest));
+        }
     }
 }

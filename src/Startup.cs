@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using tree_preservation_order_service.Utils.HealthChecks;
+using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
+using tree_preservation_order_service.Utils.StorageProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -6,12 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StockportGovUK.AspNetCore.Availability;
 using StockportGovUK.AspNetCore.Availability.Middleware;
+using StockportGovUK.AspNetCore.Middleware;
 using StockportGovUK.NetStandard.Gateways.Extensions;
-using StockportGovUK.NetStandard.Gateways.VerintService;
 using StockportGovUK.NetStandard.Gateways.MailingService;
-using tree_preservation_order_service.Utils.HealthChecks;
-using tree_preservation_order_service.Utils.ServiceCollectionExtensions;
-using tree_preservation_order_service.Utils.StorageProvider;
+using StockportGovUK.NetStandard.Gateways.VerintService;
 
 namespace tree_preservation_order_service
 {
@@ -33,25 +34,36 @@ namespace tree_preservation_order_service
 
             services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>(Configuration);
             services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
-            services.RegisterServices();
+
             services.AddAvailability();
-            services.AddSwagger();
+
+            services.RegisterServices()
+                .RegisterIOptions(Configuration)
+                .AddSwagger();
+
             services.AddHealthChecks()
                     .AddCheck<TestHealthCheck>("TestHealthCheck");
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseExceptionHandler($"/api/v1/error{(env.IsDevelopment() ? "/local" : string.Empty)}");
 
-            app.UseMiddleware<Availability>();
+          public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsEnvironment("local"))
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-            
             app.UseEndpoints(endpoints => endpoints.MapControllers());
-            
+
+            app.UseMiddleware<Availability>();
+            app.UseMiddleware<ApiExceptionHandling>();
+
             app.UseHealthChecks("/healthcheck", HealthCheckConfig.Options);
 
             app.UseSwagger();

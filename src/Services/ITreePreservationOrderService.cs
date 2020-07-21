@@ -5,6 +5,6 @@ namespace tree_preservation_order_service.Services
 {
     public interface ITreePreservationOrderService
     {
-        Task<string> CreateTreePreservationOrderCase(TreePreservationOrderRequest model);
+        Task<string> CreateCase(TreePreservationOrderRequest formData);
     }
 }
