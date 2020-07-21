@@ -1,19 +1,36 @@
-﻿using System.Collections.Generic;
+﻿using tree_preservation_order_service.Helpers;
+using tree_preservation_order_service.Models;
+using tree_preservation_order_service.Services;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using tree_preservation_order_service.Helpers;
-using tree_preservation_order_service.Services;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions;
+using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
+using System.Collections.Generic;
 
 namespace tree_preservation_order_service.Utils.ServiceCollectionExtensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void RegisterServices(this IServiceCollection services)
+        public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
             services.AddTransient<ITreePreservationOrderService, TreePreservationOrderService>();
             services.AddTransient<IMailHelper, MailHelper>();
+
+            return services;
         }
-        public static void AddSwagger(this IServiceCollection services)
+        public static IServiceCollection RegisterIOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<ConfirmIntegrationFormOptions>
+                (configuration.GetSection(ConfirmIntegrationFormOptions.ConfirmIntegrationForm));
+
+            services.Configure<VerintOptions>
+                (configuration.GetSection(VerintOptions.Verint));
+
+            return services;
+        }
+
+        public static IServiceCollection AddSwagger(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>
             {
@@ -37,6 +54,7 @@ namespace tree_preservation_order_service.Utils.ServiceCollectionExtensions
                     }
                 });
             });
+            return services;
         }
     }
 }
