@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using tree_preservation_order_service.Controllers;
 using tree_preservation_order_service.Models;
@@ -22,20 +23,20 @@ namespace tree_preservation_order_service_tests.Controllers
         public async Task Post_ShouldCallCreateCase()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
+                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);
 
             _mockTreePreservationOrderService
-                .Verify(_ => _.CreateTreePreservationOrderCase(null), Times.Once);
+                .Verify(_ => _.CreateCase(null), Times.Once);
         }
 
         [Fact]
         public async Task Post_ReturnOkActionResult()
         {
             _mockTreePreservationOrderService
-                .Setup(_ => _.CreateTreePreservationOrderCase(It.IsAny<TreePreservationOrderRequest>()))
+                .Setup(_ => _.CreateCase(It.IsAny<TreePreservationOrderRequest>()))
                 .ReturnsAsync("test");
 
             var result = await _homeController.Post(null);

@@ -21,7 +21,7 @@ namespace tree_preservation_order_service.Helpers
 
         public void SendEmail(Person person, EMailTemplate template, string caseReference, StockportGovUK.NetStandard.Models.Addresses.Address street)
         {
-            var submissionDetails = new TreePreservationOrderMailModel();
+            TreePreservationOrderMailModel submissionDetails = new TreePreservationOrderMailModel();
             _logger.LogInformation(caseReference, street, person);
             submissionDetails.Subject = $"Tree Preservation Order Request - submission";
             submissionDetails.Reference = caseReference;
