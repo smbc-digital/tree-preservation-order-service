@@ -58,7 +58,8 @@ namespace tree_preservation_order_service.Mappers
                 description.Append($"Further details: {treePreservationOrderRequest.MoreDetails}{Environment.NewLine}");
 
             if (!string.IsNullOrEmpty(treePreservationOrderRequest.ReasonForRequest))
-                description.Append($"Abandoned Reason: {treePreservationOrderRequest.ReasonForRequest}{Environment.NewLine}");
+                description.Append($"Reason for request: {treePreservationOrderRequest.ReasonForRequest}{Environment.NewLine}");
+        
             return description.ToString();
         }
     }

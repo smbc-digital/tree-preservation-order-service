@@ -39,7 +39,7 @@ namespace tree_preservation_order_service.Services
                 throw new Exception("TreePreservationOrderService.CreateCase: GetStreet status code not successful");
 
             // confirm uses the USRN for streets,
-            // but verint uses verint-address-id (Reference) (abandonedVehicleReport.StreetAddress.PlaceRef)
+            // but verint uses verint-address-id (Reference) (treePreservationOrderRequest.StreetAddress.PlaceRef)
             crmCase.Street.USRN = streetResult.ResponseContent.USRN;
 
             try
@@ -66,7 +66,7 @@ namespace tree_preservation_order_service.Services
             }
             catch (Exception ex)
             {
-                throw new Exception($"CreateTreePreservationOrderCase thrown exception when sending the email", ex);
+                throw new Exception($"CRMService CreateTreePreservationOrderService an exception has occured while creating the case in verint service", ex);
             }
         }
     }
