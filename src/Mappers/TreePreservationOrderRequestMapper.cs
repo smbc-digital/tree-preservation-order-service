@@ -43,7 +43,7 @@ namespace tree_preservation_order_service.Mappers
                 crmCase.Street = new Street
                 {
                     Reference = model.StreetAddress.PlaceRef,
-                    Description = model.CustomersAddress.ToString()
+                    Description = model.StreetAddress.ToString()
                 };
             }
 
