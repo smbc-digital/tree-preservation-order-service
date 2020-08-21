@@ -54,9 +54,6 @@ namespace tree_preservation_order_service.Mappers
         {
             StringBuilder description = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(treePreservationOrderRequest.MoreDetails))
-                description.Append($"Further details: {treePreservationOrderRequest.MoreDetails}{Environment.NewLine}");
-
             if (!string.IsNullOrEmpty(treePreservationOrderRequest.ReasonForRequest))
                 description.Append($"Reason for request: {treePreservationOrderRequest.ReasonForRequest}{Environment.NewLine}");
         

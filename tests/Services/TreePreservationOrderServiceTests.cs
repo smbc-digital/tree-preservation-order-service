@@ -189,7 +189,6 @@ namespace tree_preservation_order_service_tests.Services
 
             Assert.NotNull(crmCaseParameter);
             Assert.Contains(_treePreservationOrderRequestData.ReasonForRequest, crmCaseParameter.VerintCase.Description);
-            Assert.Contains(_treePreservationOrderRequestData.MoreDetails, crmCaseParameter.VerintCase.Description);
         }
     }
 }
