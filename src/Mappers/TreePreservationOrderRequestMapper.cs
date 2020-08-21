@@ -40,6 +40,7 @@ namespace tree_preservation_order_service.Mappers
             if (!string.IsNullOrWhiteSpace(model.StreetAddress?.PlaceRef))
             {
                 crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
+                crmCase.RaisedByBehaviour = RaisedByBehaviourEnum.Individual;
                 crmCase.Street = new Street
                 {
                     Reference = model.StreetAddress.PlaceRef,
