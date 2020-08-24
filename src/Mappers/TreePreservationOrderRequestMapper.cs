@@ -19,6 +19,7 @@ namespace tree_preservation_order_service.Mappers
                 Classification = _verintOptions.Classification,
                 RaisedByBehaviour = RaisedByBehaviourEnum.Individual,
                 FurtherLocationInformation = model.MoreDetails,
+                RaisedByBehaviour = RaisedByBehaviourEnum.Individual,
                 Description = GenerateDescription(model),
                 Customer = new Customer
                 {
@@ -57,7 +58,7 @@ namespace tree_preservation_order_service.Mappers
 
             if (!string.IsNullOrEmpty(treePreservationOrderRequest.ReasonForRequest))
                 description.Append($"Reason for request: {treePreservationOrderRequest.ReasonForRequest}{Environment.NewLine}");
-        
+
             return description.ToString();
         }
     }
