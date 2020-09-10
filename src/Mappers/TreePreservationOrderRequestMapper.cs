@@ -17,7 +17,6 @@ namespace tree_preservation_order_service.Mappers
                 EventCode = _VOFConfiguration.EventId,
                 EventTitle = _verintOptions.EventTitle,
                 Classification = _verintOptions.Classification,
-                RaisedByBehaviour = RaisedByBehaviourEnum.Individual,
                 FurtherLocationInformation = model.MoreDetails,
                 RaisedByBehaviour = RaisedByBehaviourEnum.Individual,
                 Description = GenerateDescription(model),
@@ -31,7 +30,7 @@ namespace tree_preservation_order_service.Mappers
                     {
                         AddressLine1 = model.CustomersAddress.AddressLine1,
                         AddressLine2 = model.CustomersAddress.AddressLine2,
-                        AddressLine3 = model.CustomersAddress.Town,
+                        City = model.CustomersAddress.Town,
                         Postcode = model.CustomersAddress.Postcode,
                         Reference = model.CustomersAddress.PlaceRef,
                         Description = model.CustomersAddress.ToString()
@@ -42,6 +41,7 @@ namespace tree_preservation_order_service.Mappers
             if (!string.IsNullOrWhiteSpace(model.StreetAddress?.PlaceRef))
             {
                 crmCase.AssociatedWithBehaviour = AssociatedWithBehaviourEnum.Street;
+                crmCase.RaisedByBehaviour = RaisedByBehaviourEnum.Individual;
                 crmCase.Street = new Street
                 {
                     Reference = model.StreetAddress.PlaceRef,
