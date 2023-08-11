@@ -7,13 +7,11 @@ using Moq;
 using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using StockportGovUK.NetStandard.Gateways.Response;
 using StockportGovUK.NetStandard.Gateways.VerintService;
-using StockportGovUK.NetStandard.Models.Addresses;
-using StockportGovUK.NetStandard.Models.Models.Verint.VerintOnlineForm;
-using StockportGovUK.NetStandard.Models.Verint;
-using System;
-using System.Threading.Tasks;
+using StockportGovUK.NetStandard.Gateways.Models.Addresses;
+using StockportGovUK.NetStandard.Gateways.Models.Verint.VerintOnlineForm;
+using StockportGovUK.NetStandard.Gateways.Models.Verint;
 using Xunit;
-using Address = StockportGovUK.NetStandard.Models.Addresses.Address;
+using Address = StockportGovUK.NetStandard.Gateways.Models.Addresses.Address;
 
 
 namespace tree_preservation_order_service_tests.Services

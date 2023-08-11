@@ -1,4 +1,4 @@
-﻿using StockportGovUK.NetStandard.Models.Addresses;
+﻿using StockportGovUK.NetStandard.Gateways.Models.Addresses;
 
 namespace tree_preservation_order_service.Models
 {

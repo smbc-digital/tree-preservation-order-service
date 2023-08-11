@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using StockportGovUK.AspNetCore.Availability;
-using StockportGovUK.AspNetCore.Availability.Middleware;
 using StockportGovUK.AspNetCore.Middleware;
 using StockportGovUK.NetStandard.Gateways.Extensions;
 using StockportGovUK.NetStandard.Gateways.MailingService;
@@ -35,8 +33,6 @@ namespace tree_preservation_order_service
             services.AddHttpClient<IVerintServiceGateway, VerintServiceGateway>(Configuration);
             services.AddHttpClient<IMailingServiceGateway, MailingServiceGateway>(Configuration);
 
-            services.AddAvailability();
-
             services.RegisterServices()
                 .RegisterIOptions(Configuration)
                 .AddSwagger();
@@ -61,7 +57,6 @@ namespace tree_preservation_order_service
             app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-            app.UseMiddleware<Availability>();
             app.UseMiddleware<ApiExceptionHandling>();
 
             app.UseHealthChecks("/healthcheck", HealthCheckConfig.Options);

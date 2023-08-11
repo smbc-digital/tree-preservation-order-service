@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
 using StockportGovUK.NetStandard.Gateways.VerintService;
-using StockportGovUK.NetStandard.Models.Enums;
+using StockportGovUK.NetStandard.Gateways.Enums;
 using Microsoft.Extensions.Options;
 using tree_preservation_order_service.Helpers;
 using tree_preservation_order_service.Mappers;
