@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using tree_preservation_order_service.Models;
 using StockportGovUK.NetStandard.Extensions.VerintExtensions.VerintOnlineFormsExtensions.ConfirmIntegrationFromExtensions;
-using StockportGovUK.NetStandard.Models.Verint;
+using StockportGovUK.NetStandard.Gateways.Models.Verint;
 
 namespace tree_preservation_order_service.Mappers
 {

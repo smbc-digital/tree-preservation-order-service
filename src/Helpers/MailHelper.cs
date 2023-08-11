@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using Microsoft.Extensions.Logging;
 using StockportGovUK.NetStandard.Gateways.MailingService;
-using StockportGovUK.NetStandard.Models.Enums;
-using StockportGovUK.NetStandard.Models.Mail;
-using StockportGovUK.NetStandard.Models.Models.TreePreservationOrder;
+using StockportGovUK.NetStandard.Gateways.Enums;
+using StockportGovUK.NetStandard.Gateways.Models.Mail;
+using StockportGovUK.NetStandard.Gateways.Models.TreePreservationOrder;
 using tree_preservation_order_service.Models;
+using Address = StockportGovUK.NetStandard.Gateways.Models.Addresses.Address;
 
 namespace tree_preservation_order_service.Helpers
 {
@@ -19,7 +19,7 @@ namespace tree_preservation_order_service.Helpers
             _logger = logger;
         }
 
-        public void SendEmail(Person person, EMailTemplate template, string caseReference, StockportGovUK.NetStandard.Models.Addresses.Address street)
+        public void SendEmail(Person person, EMailTemplate template, string caseReference, Address street)
         {
             TreePreservationOrderMailModel submissionDetails = new TreePreservationOrderMailModel();
             _logger.LogInformation(caseReference, street, person);
